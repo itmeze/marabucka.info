@@ -345,7 +345,7 @@ a.menu-bottom:active {color:#b1b1b1; background-image:none }  /* selected link *
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;
-	width: 590px;
+	width: 600px;
 	height: 500px;
 }
 .wraptocenter * {
