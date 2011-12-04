@@ -18,8 +18,13 @@
     $("body").append("<img id='preloader' style='display:none'></img>");
     return $("#mycarousel li").each(function() {
       return $(this).click(function() {
-        var imageUrl;
+        var dynamicUrlPart, imageUrl;
         imageUrl = $(this).find("img").attr("-data-real");
+        dynamicUrlPart = '';
+        if ($.browser.msie && $.browser.version < 9) {
+          dynamicUrlPart = '?' + new Date().getTime();
+        }
+        imageUrl = imageUrl + dynamicUrlPart;
         $("#main-image img").attr("src", 'images/loadingimage.gif');
         return $('#preloader').attr('src', imageUrl).load(function() {
           return $("#main-image img").attr("src", imageUrl);
