@@ -1,31 +1,27 @@
-currentElement = $('#menu a.here')
-$('#menu a').bind 'mouseover', () ->
-  $('#menu a.selected').each () ->
-    $(this).removeClass('selected')
-  $(this).addClass('selected')
-  currentElement.removeClass('here')
-$('#menu').bind 'mouseleave', () ->
-  $('#menu a.selected').each () ->
-    $(this).removeClass('selected')
-  currentElement.addClass('here')
+currentElement = $("#menu a.here")
+$("#menu a").bind "mouseover", ->
+  $("#menu a.selected").each ->
+    $(this).removeClass "selected"
 
-$(document).ready () ->
-  $('#tS3 .jTscroller a').each () ->
-    $(this).click () ->
-      $('#main-image img').attr 'src', $(this).find('img').attr('-data-real')
+  $(this).addClass "selected"
+  currentElement.removeClass "here"
 
-window.onload = () ->
-  $("#tS3").thumbnailScroller {
-      scrollerType:"hoverPrecise",
-      scrollerOrientation:"vertical",
-      scrollSpeed:2,
-      scrollEasing:"easeOutCirc",
-      scrollEasingAmount:800,
-      acceleration:4,
-      scrollSpeed:800,
-      noScrollCenterSpace:10,
-      autoScrolling:0,
-      autoScrollingSpeed:2000,
-      autoScrollingEasing:"easeInOutQuad",
-      autoScrollingDelay:500
-  }
+$("#menu").bind "mouseleave", ->
+  $("#menu a.selected").each ->
+    $(this).removeClass "selected"
+
+  currentElement.addClass "here"
+
+$(document).ready ->
+  $("body").append "<img id='preloader' style='display:none'></img>"
+  $("#mycarousel li").each ->
+    $(this).click ->
+      imageUrl = $(this).find("img").attr("-data-real")
+      $("#main-image img").attr "src", 'images/loadingimage.gif'
+      $('#preloader').attr('src', imageUrl).load ->
+        $("#main-image img").attr "src", imageUrl
+
+$(document).ready ->
+  $("#mycarousel").jcarousel
+    vertical: true
+    scroll: 2
